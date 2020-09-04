@@ -6,14 +6,10 @@ require_relative 'ruby_snake/version'
 
 module RubySnake
   class Game < RichEngine::Game
-    def on_create
-    end
+    def on_create; end
 
-    def on_update(x, y)
-
+    def on_update(_x, _y)
       true
     end
   end
 end
-
-# RubySnake::Game.play

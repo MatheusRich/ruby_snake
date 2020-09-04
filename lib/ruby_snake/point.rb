@@ -8,5 +8,9 @@ module RubySnake
       @x = x
       @y = y
     end
+
+    def to_ary
+      [x, y]
+    end
   end
 end

@@ -1,12 +1,14 @@
+GIT
+  remote: https://github.com/MatheusRich/rich_engine
+  revision: 40407f2fe400c12499e8bb84c5c5bc17053ca2e7
+  branch: master
+  specs:
+    rich_engine (0.1.0)
+
 PATH
   remote: .
   specs:
     ruby_snake (0.1.0)
-
-PATH
-  remote: /home/matheus/Documents/matheus/rich_engine
-  specs:
-    rich_engine (0.1.0)
 
 GEM
   remote: https://rubygems.org/

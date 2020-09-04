@@ -34,10 +34,6 @@ module RubySnake
       @speed_timer.update(elapsed_time)
 
       move! if @move_cooldown.get > @speed
-      if @speed_timer.get > 5
-        @speed -= 0.1
-        @speed_timer.reset!
-      end
     end
 
     def draw(canvas)

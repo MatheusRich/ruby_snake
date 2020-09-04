@@ -15,7 +15,7 @@ module RubySnake
     def on_update(dt, key)
       game_over = false
 
-      # @canvas.clear
+      @canvas.clear
       @game_objects.each do |obj|
         obj.update(dt, key)
       end

@@ -12,5 +12,9 @@ module RubySnake
     def to_ary
       [x, y]
     end
+
+    def ==(other)
+      @x == other.x && @y == other.y
+    end
   end
 end

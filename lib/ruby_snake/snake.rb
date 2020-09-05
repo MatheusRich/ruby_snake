@@ -4,13 +4,13 @@ require_relative 'point'
 
 module RubySnake
   class Snake
-    #using RichEngine::StringColors
+    # using RichEngine::StringColors
 
     INITIAL_SNAKE = [
       Point.new(3, 0),
       Point.new(2, 0),
       Point.new(1, 0),
-      Point.new(0, 0),
+      Point.new(0, 0)
     ].freeze
     DIRECTIONS = %i[up down left right].freeze
     INVERSE_DIRECTIONS = {
@@ -18,30 +18,32 @@ module RubySnake
       down: :up,
       left: :right,
       right: :left
-    }
+    }.freeze
 
     def initialize
       @body = INITIAL_SNAKE.dup
       @direction = :right
       @move_cooldown = RichEngine::Timer.new
-      @speed_timer = RichEngine::Timer.new
       @speed = 0.3
+      @is_dead = false
     end
 
-    def update(elapsed_time, key)
+    def update(dt, key)
       handle_input(key)
-      @move_cooldown.update(elapsed_time)
-      @speed_timer.update(elapsed_time)
-
-      move! if @move_cooldown.get > @speed
+      move(dt)
+      check_is_alive
     end
 
     def draw(canvas)
       @body.each do |x, y|
-        canvas[x, y] = '█'
+        canvas[x, y] = current_sprite
       end
 
       canvas
+    end
+
+    def dead?
+      @is_dead
     end
 
     private
@@ -53,8 +55,17 @@ module RubySnake
       @direction = key
     end
 
+    def check_is_alive
+      @is_dead = hit_itself? || hit_boundary?
+    end
+
     def inverse_direction?(key)
       key == INVERSE_DIRECTIONS[@direction]
+    end
+
+    def move(dt)
+      @move_cooldown.update(dt)
+      move! if @move_cooldown.get > @speed
     end
 
     def move!
@@ -85,6 +96,27 @@ module RubySnake
 
     def head
       @body.first
+    end
+
+    def current_sprite
+      alive? ? '█' : 'X'
+    end
+
+    def alive?
+      !@is_dead
+    end
+
+    def hit_itself?
+      head, *tail = @body
+
+      tail.any? { |p| p == head }
+    end
+
+    def hit_boundary?
+      x_out_of_bounds = head.x.negative? || head.x >= 50
+      y_out_of_bounds = head.y.negative? || head.y >= 10
+
+      x_out_of_bounds || y_out_of_bounds
     end
   end
 end

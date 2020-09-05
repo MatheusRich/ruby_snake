@@ -9,31 +9,29 @@ module RubySnake
     FPS = 1.0 / 60
 
     def on_create
-      @game_objects = [Snake.new]
+      @snake = Snake.new
+      @game_objects = [@snake]
+      @game_over = false
     end
 
     def on_update(dt, key)
-      game_over = false
-
-      @canvas.clear
       @game_objects.each do |obj|
         obj.update(dt, key)
       end
 
+      binding.irb if key == :n
+      @game_over = @snake.dead? || key == :q
+
+      @canvas.clear
       @game_objects.each do |obj|
         obj.draw(@canvas)
       end
-
-      binding.irb if key == :n
-      game_over = key == :q
 
       render
 
       sleep [FPS - dt, 0].max
 
-      !game_over
+      !@game_over
     end
   end
 end
-
-RubySnake::Game.play

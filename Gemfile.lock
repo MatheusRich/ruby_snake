@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/MatheusRich/rich_engine
-  revision: 8ba315d1281083b71d76d6805b614d986ab78ccf
+  revision: 2af5d4f8667ea6c2ca0904f9919c5336d00dc68d
   branch: master
   specs:
     rich_engine (0.1.0)

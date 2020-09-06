@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'rich_engine'
+require_relative 'ruby_snake/entity'
+require_relative 'ruby_snake/food'
 require_relative 'ruby_snake/snake'
 require_relative 'ruby_snake/version'
 
@@ -10,7 +12,7 @@ module RubySnake
 
     def on_create
       @snake = Snake.new
-      @game_objects = [@snake]
+      @game_objects = [@snake, Food.new(30, 5)]
       @game_over = false
     end
 

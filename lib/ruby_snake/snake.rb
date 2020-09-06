@@ -4,7 +4,7 @@ require_relative 'point'
 
 module RubySnake
   class Snake
-    # using RichEngine::StringColors
+    include Entity
 
     BODY = [
       Point.new(3, 0),

@@ -23,15 +23,14 @@ module RubySnake
     def initialize
       @body = BODY.dup
       @direction = :right
-      @move_cooldown = RichEngine::Timer.new
-      @speed = 0.3
+      @move_cooldown = RichEngine::Cooldown.new(0.3)
       @is_dead = false
     end
 
     def update(dt, key)
       handle_input(key)
       move(dt)
-      check_is_alive
+      check_is_dead
     end
 
     def draw(canvas)
@@ -55,7 +54,7 @@ module RubySnake
       @direction = key
     end
 
-    def check_is_alive
+    def check_is_dead
       @is_dead = hit_itself? || hit_boundary?
     end
 
@@ -67,7 +66,7 @@ module RubySnake
       return if dead?
 
       @move_cooldown.update(dt)
-      move! if @move_cooldown.get > @speed
+      move! if @move_cooldown.ready?
     end
 
     def move!
@@ -94,6 +93,10 @@ module RubySnake
 
     def grow!
       send("move_#{@direction}!")
+    end
+
+    def ungrow!
+      @body.shift
     end
 
     def head

@@ -11,13 +11,14 @@ module RubySnake
     FPS = 1.0 / 60
 
     def on_create
+      @canvas = RichEngine::Canvas.new(@width, @height, canvas_bg: '.')
       @snake = Snake.new
-      @game_objects = [@snake, Food.new(30, 5)]
+      @entities = [@snake, Food.new(30, 5)]
       @game_over = false
     end
 
     def on_update(dt, key)
-      @game_objects.each do |obj|
+      @entities.each do |obj|
         obj.update(dt, key)
       end
 
@@ -25,7 +26,7 @@ module RubySnake
       @game_over = @snake.dead? || key == :q
 
       @canvas.clear
-      @game_objects.each do |obj|
+      @entities.each do |obj|
         obj.draw(@canvas)
       end
 
@@ -34,6 +35,11 @@ module RubySnake
       sleep [FPS - dt, 0].max
 
       !@game_over
+    end
+
+    def render
+      super
+      puts "\nScore: 0"
     end
   end
 end

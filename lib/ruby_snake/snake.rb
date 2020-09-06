@@ -6,7 +6,7 @@ module RubySnake
   class Snake
     # using RichEngine::StringColors
 
-    INITIAL_SNAKE = [
+    BODY = [
       Point.new(3, 0),
       Point.new(2, 0),
       Point.new(1, 0),
@@ -21,7 +21,7 @@ module RubySnake
     }.freeze
 
     def initialize
-      @body = INITIAL_SNAKE.dup
+      @body = BODY.dup
       @direction = :right
       @move_cooldown = RichEngine::Timer.new
       @speed = 0.3
@@ -64,6 +64,8 @@ module RubySnake
     end
 
     def move(dt)
+      return if dead?
+
       @move_cooldown.update(dt)
       move! if @move_cooldown.get > @speed
     end
@@ -99,11 +101,7 @@ module RubySnake
     end
 
     def current_sprite
-      alive? ? '█' : 'X'
-    end
-
-    def alive?
-      !@is_dead
+      dead? ? 'X' : '█'
     end
 
     def hit_itself?

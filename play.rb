@@ -2,4 +2,4 @@
 
 require 'ruby_snake'
 
-RubySnake::Game.play
+RubySnake::Game.play(50, 30)

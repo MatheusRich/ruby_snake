@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rich_engine', git: 'https://github.com/MatheusRich/rich_engine', branch: 'master'
+gem "rich_engine", path: "../rich_engine"
 
 gemspec
 

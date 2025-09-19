@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'ruby_snake'
   spec.version       = RubySnake::VERSION
   spec.authors       = ['Matheus Richard']
-  spec.email         = ['matheus.richard@fretadao.com.br']
+  spec.email         = ['matheusrichardt@gmail.com']
 
   spec.summary       = 'A Ruby game engine'
   spec.homepage      = 'https://github.com/MatheusRich/ruby_snake'
